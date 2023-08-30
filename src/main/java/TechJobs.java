@@ -119,7 +119,21 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+// TASK 1 - Implement printJobs
 
-        System.out.println("printJobs is not implemented yet");
+        // if there are no results for the search
+        if (someJobs.size() == 0) {
+            System.out.println("No Result.");
+            // prints out jobs in the format given on rubric
+        } else {
+            for (int i=0; i < someJobs.size(); i++) {
+                System.out.println("*****");
+                for (Map.Entry<String, String> entry : someJobs.get(i).entrySet()) {
+                    System.out.println(entry.getKey() + " :" + entry.getValue());
+                }
+                System.out.println("*****\n");
+            }
+
+        }
     }
 }

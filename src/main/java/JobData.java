@@ -5,10 +5,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -56,12 +53,12 @@ public class JobData {
     /**
      * Returns results of search the jobs data by key/value, using
      * inclusion of the search term.
-     *
+     * <p>
      * For example, searching for employer "Enterprise" will include results
      * with "Enterprise Holdings, Inc".
      *
-     * @param column   Column that should be searched.
-     * @param value Value of teh field to search for
+     * @param column Column that should be searched.
+     * @param value  Value of teh field to search for
      * @return List of all jobs matching the criteria
      */
     public static ArrayList<HashMap<String, String>> findByColumnAndValue(String column, String value) {
@@ -87,16 +84,34 @@ public class JobData {
      * Search all columns for the given term
      *
      * @param value The search term to look for
-     * @return      List of all jobs with at least one field containing the value
+     * @return List of all jobs with at least one field containing the value
      */
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
 
         // load data, if not already loaded
         loadData();
 
-        // TODO - implement this method
-        return null;
+        // TASK 2 - Create Method findByValue - At this stage, the application will allow users to search a given column of the data for a given String. Your next task is to enable a search that looks for the search term in all of the columns.
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+       for (HashMap<String, String> jobValue : allJobs) {
+            Set<String> keys = jobValue.keySet();
+            Iterator<String> keysIterator = keys.iterator();
+
+            while (keysIterator.hasNext()) {
+                String key = keysIterator.next();
+                String aValue = jobValue.get(key).toLowerCase(); //make search term case-insensitive
+
+                if (aValue.contains(value.toLowerCase())) {
+                    jobs.add(jobValue);
+                }
+            }
+        }
+        return jobs;
+
     }
+
+
 
     /**
      * Read in data from a CSV file and store it in a list

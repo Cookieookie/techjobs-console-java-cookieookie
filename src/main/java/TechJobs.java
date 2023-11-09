@@ -123,15 +123,15 @@ public class TechJobs {
 
         // if there are no results for the search
         if (someJobs.size() == 0) {
-            System.out.println("No Result.");
+            System.out.println("No Results");
             // prints out jobs in the format given on rubric
         } else {
             for (int i=0; i < someJobs.size(); i++) {
-                System.out.println("*****");
+                System.out.println("\n*****");
                 for (Map.Entry<String, String> entry : someJobs.get(i).entrySet()) {
-                    System.out.println(entry.getKey() + " :" + entry.getValue());
+                    System.out.println(entry.getKey() + ": " + entry.getValue());
                 }
-                System.out.println("*****\n");
+                System.out.println("*****");
             }
 
         }
